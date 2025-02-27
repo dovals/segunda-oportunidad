@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ producto.nombre }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='detalles.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <div class="product-container">
+        <div class="product-image">
+            <img src="{{ url_for('static', filename='uploads/' + producto.imagen) }}" alt="{{ producto.nombre }}">
+        </div>
+        <div class="product-info">
+            <h1>{{ producto.nombre }}</h1>
+            <p class="price">${{ producto.precio }}</p>
+            <p class="description">{{ producto.descripcion }}</p>
+            <p class="contacto"><strong>Contacto:</strong> {{ producto.telefono_contacto }}</p>
+            <button class="buy-btn">Contactar al Vendedor</button>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

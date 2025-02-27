@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marketplace</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h1>Marketplace</h1>
+
+    <!-- Barra de búsqueda y filtro -->
+    <div class="filter-container">
+        <input type="text" id="search" placeholder="Buscar productos..." onkeyup="filterProducts()">
+        <select id="categoryFilter" onchange="filterProducts()">
+            <option value="">Filtrar por categoría</option>
+            <option value="Electrónica">Electrónica</option>
+            <option value="Ropa">Ropa</option>
+            <option value="Hogar">Hogar</option>
+            <option value="Deportes">Deportes</option>
+        </select>
+    </div>
+
+    <div id="product-list" class="grid-container">
+        {% for image in image_files %}
+        <div class="product-card" data-name="{{ image }}" data-category="Electrónica">
+            <a href="{{ url_for('detalle', nombre=image) }}">
+                <img src="{{ url_for('static', filename='uploads/' + image) }}" alt="Producto">
+                <h2>{{ image }}</h2>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script>
+    function filterProducts() {
+        let searchTerm = document.getElementById('search').value.toLowerCase();
+        let selectedCategory = document.getElementById('categoryFilter').value.toLowerCase();
+        let products = document.querySelectorAll('.product-card');
+
+        products.forEach(product => {
+            let productName = product.getAttribute('data-name').toLowerCase();
+            let productCategory = product.getAttribute('data-category').toLowerCase();
+
+            if (productName.includes(searchTerm) && (selectedCategory === '' || productCategory === selectedCategory)) {
+                product.style.display = 'block';
+            } else {
+                product.style.display = 'none';
+            }
+        });
+    }
+</script>
+
+</body>
+</html>

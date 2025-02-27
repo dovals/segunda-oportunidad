@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Producto</title>
+</head>
+<body>
+    <h1>Agregar un nuevo producto</h1>
+    <form action="{{ url_for('agregar_producto') }}" method="POST" enctype="multipart/form-data">
+        <label for="imagen">Imagen del Producto:</label><br>
+        <input type="file" id="imagen" name="imagen" required><br><br>
+        <button type="submit">Agregar Producto</button>
+    </form>
+</body>
+</html>
