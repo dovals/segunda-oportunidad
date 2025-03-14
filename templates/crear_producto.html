@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agregar Producto</title>
+    <title>Crear Producto</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='agregar_producto.css') }}">
+
 </head>
 <body>
     <div class="container">
-        <h1>Agregar un Nuevo Producto</h1>
+        <header>
+            <h1>Añadir Nuevo Producto</h1>
+            <a href="{{ url_for('dashboard_vendedor') }}" class="btn">Volver al Dashboard</a>
+        </header>
 
-        <!-- Enlace para volver al dashboard -->
-        <a href="{{ url_for('dashboard_vendedor') }}" class="btn-back">Volver al Dashboard</a>
-
-        <!-- Formulario para agregar producto -->
         <form method="POST" enctype="multipart/form-data">
     <input type="text" name="nombre" placeholder="Nombre del producto" required>
     <input type="number" name="precio" placeholder="Precio" required>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión | Registro</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendedor.css') }}">
+</head>
+<body>
+
+    <div class="container">
+        <!-- LOGO -->
+        <h1 class="logo">MiCatálogo</h1>
+
+        <!-- Formulario de Inicio de Sesión -->
+        <div id="login-form">
+            <h3>Iniciar Sesión</h3>
+            <form method="POST" action="{{ url_for('vendedor') }}">
+                <input type="email" name="email" placeholder="Correo electrónico" required>
+                <input type="password" name="password" placeholder="Contraseña" required>
+                <button type="submit" name="login">Iniciar Sesión</button>
+            </form>
+            <p class="register-link">
+                ¿No tienes cuenta? <a href="#" onclick="toggleForm()">Crear cuenta nueva</a>
+            </p>
+        </div>
+
+        <!-- Formulario de Registro (Oculto al inicio) -->
+        <div id="register-form" style="display: none;">
+            <h3>Crear Cuenta</h3>
+            <form method="POST" action="{{ url_for('vendedor') }}">
+                <input type="text" name="nombre" placeholder="Nombre completo" required>
+                <input type="email" name="email" placeholder="Correo electrónico" required>
+                <input type="text" name="telefono" placeholder="Teléfono" required>
+                <input type="password" name="password" placeholder="Contraseña" required>
+                <button type="submit" name="registrar">Registrarse</button>
+            </form>
+            <p class="register-link">
+                ¿Ya tienes cuenta? <a href="#" onclick="toggleForm()">Iniciar sesión</a>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        function toggleForm() {
+            document.getElementById('login-form').style.display =
+                document.getElementById('login-form').style.display === 'none' ? 'block' : 'none';
+
+            document.getElementById('register-form').style.display =
+                document.getElementById('register-form').style.display === 'none' ? 'block' : 'none';
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard del Vendedor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Dashboard</h1>
+            <a href="{{ url_for('crear_producto') }}" class="btn">Añadir Producto</a>
+        </header>
+
+        <!-- Tarjetas de productos -->
+        <div class="product-cards">
+            {% for producto in productos %}
+                <div class="product-card">
+                    <img src="{{ url_for('static', filename=producto.imagen) }}" alt="{{ producto.nombre }}">
+                    <h3>{{ producto.nombre }}</h3>
+                    <p>{{ producto.descripcion }}</p>
+                    <p class="price">${{ producto.precio }}</p>
+                    <div class="actions">
+                        <!-- Enlace para editar producto -->
+                        <a href="{{ url_for('editar_producto_route', producto_id=producto.id) }}" class="btn-edit">Editar</a>
+
+                        <!-- Formulario para eliminar producto -->
+                        <form method="POST" action="{{ url_for('eliminar_producto_route', producto_id=producto.id) }}" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este producto?');">
+                            <button type="submit" class="btn-delete" style="color: red;">Eliminar</button>
+                        </form>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <footer>
+            <p>&copy; 2025 Tu Tienda. Todos los derechos reservados.</p>
+        </footer>
+    </div>
+</body>
+</html>

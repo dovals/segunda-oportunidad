@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Producto</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='editar_productos.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Editar Producto</h1>
+            <a href="{{ url_for('dashboard_vendedor') }}" class="btn back-btn">Volver al Dashboard</a>
+        </header>
+
+        <!-- Formulario para editar producto -->
+        <section class="edit-product-section">
+            <h2>Detalles del Producto</h2>
+            <form method="POST" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="nombre">Nombre</label>
+        <input type="text" class="form-control" id="nombre" name="nombre" value="{{ producto['nombre'] }}" required>
+    </div>
+
+    <div class="form-group">
+        <label for="imagenes">Imágenes (seleccionar nuevas)</label>
+        <input type="file" class="form-control" id="imagenes" name="imagenes" multiple>
+    </div>
+
+    <h5>Imágenes actuales:</h5>
+    <ul>
+        {% for imagen in producto['imagenes'].split(',') %}
+            <li>
+                <img src="{{ url_for('static', filename=imagen) }}" alt="Imagen del producto" width="100">
+                <form action="{{ url_for('eliminar_imagen', producto_id=producto['id'], imagen=imagen) }}" method="POST" style="display:inline;">
+                    <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <div class="form-group">
+        <label for="precio">Precio</label>
+        <input type="number" class="form-control" id="precio" name="precio" value="{{ producto['precio'] }}" required>
+    </div>
+
+    <div class="form-group">
+        <label for="descripcion">Descripción</label>
+        <textarea class="form-control" id="descripcion" name="descripcion" rows="4" required>{{ producto['descripcion'] }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="telefono_contacto">Teléfono de contacto</label>
+        <input type="text" class="form-control" id="telefono_contacto" name="telefono_contacto" value="{{ producto['telefono_contacto'] }}" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Actualizar producto</button>
+</form>
+
+        </section>
+    </div>
+</body>
+</html>
